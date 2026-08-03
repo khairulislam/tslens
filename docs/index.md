@@ -40,6 +40,33 @@ one consistent interface.
 
 </div>
 
+## Why tslens instead of another interpretability library?
+
+General-purpose explainability libraries treat a time series as another input tensor,
+while existing time-series packages are documented primarily around classifier or compact
+benchmark models. tslens connects a broad attribution API to modern time-series practice:
+multi-horizon and multivariate outputs, recent deep forecasting architectures, and
+LLM-backed time-series foundation models.
+
+| Capability | **tslens** | [Captum](https://github.com/meta-pytorch/captum) | [Time Interpret](https://github.com/josephenguehard/time_interpret) | [TSInterpret](https://github.com/fzi-forschungszentrum-informatik/TSInterpret) |
+| --- | :---: | :---: | :---: | :---: |
+| Methods designed for temporal dependencies | ✓ | — | ✓ | ✓ |
+| Classification **and** regression/forecasting workflows | ✓ | Generic outputs | Method-dependent | Classification-focused |
+| Attribution for each individual forecast horizon | ✓ | Manual target wiring | Manual target wiring | — |
+| Joint time–feature maps for multivariate inputs | ✓ | Generic feature maps | Varies by method | Varies by method |
+| Documented integration with recent deep time-series models | ✓ | — | — | — |
+| Tested with LLM-backed time-series foundation models | ✓ | — | — | — |
+| Native and established methods behind one PyTorch API | ✓ | General-purpose methods | Captum + time-series methods | Separate multi-backend API |
+
+!!! note "A scoped comparison"
+
+    “—” means the project does not provide first-class, documented support for the
+    capability—not that integration is theoretically impossible. Among these libraries,
+    tslens is the only one with documented, tested integrations spanning TSlib models such
+    as DLinear, iTransformer, and TimesNet and LLM-backed models such as CALF, OFA/GPT4TS,
+    and TimeLLM. See [tested models](models.md) and the
+    [integration cookbook](integration.md).
+
 ## Interpretation methods
 
 tslens covers perturbation, gradient, learned-mask, and surrogate approaches

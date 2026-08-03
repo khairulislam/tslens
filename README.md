@@ -32,6 +32,31 @@ method, addresses both.
 - **One interface:** compare established interpretation methods from Captum, Time Interpret,
   and this package's own native implementations side by side.
 
+### How it compares
+
+Most general-purpose explainability libraries treat a time series as another input tensor,
+while existing time-series packages are documented primarily around classifier or compact
+benchmark models. tslens connects a broad attribution API to modern time-series practice:
+multi-horizon and multivariate outputs, recent deep forecasting architectures, and
+LLM-backed time-series foundation models.
+
+| Capability | **tslens** | [Captum](https://github.com/meta-pytorch/captum) | [Time Interpret](https://github.com/josephenguehard/time_interpret) | [TSInterpret](https://github.com/fzi-forschungszentrum-informatik/TSInterpret) |
+| --- | :---: | :---: | :---: | :---: |
+| Methods designed for temporal dependencies | ✓ | — | ✓ | ✓ |
+| Classification **and** regression/forecasting workflows | ✓ | Generic outputs | Method-dependent | Classification-focused |
+| Attribution for each individual forecast horizon | ✓ | Manual target wiring | Manual target wiring | — |
+| Joint time–feature maps for multivariate inputs | ✓ | Generic feature maps | Varies by method | Varies by method |
+| Documented integration with recent deep time-series models | ✓ | — | — | — |
+| Tested with LLM-backed time-series foundation models | ✓ | — | — | — |
+| Native and established methods behind one PyTorch API | ✓ | General-purpose methods | Captum + time-series methods | Separate multi-backend API |
+
+Here, “—” means the project does not provide first-class, documented support for the
+capability—not that integration is theoretically impossible. Among these libraries,
+tslens is the only one with documented, tested integrations spanning TSlib models such
+as DLinear, iTransformer, and TimesNet and LLM-backed models such as CALF, OFA/GPT4TS,
+and TimeLLM. See the [tested model matrix](https://khairulislam.github.io/tslens/models/)
+and [integration cookbook](https://khairulislam.github.io/tslens/integration/).
+
 ## Quickstart
 
 ```bash
@@ -70,6 +95,10 @@ Plot `attr` as a heatmap over `(seq_len, n_features)` to read off what the model
 | --- | --- |
 | **[Quickstart notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/quickstart.ipynb)** | 60 seconds, no dataset download. Plants a known signal, trains a small GRU, checks WinTSR recovers it. |
 | **[TSlib models notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/tslib_models.ipynb)** | Explaining DLinear, iTransformer, TimesNet and friends. No wrapper class needed. |
+| **[Pretrained Timer notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_timer.ipynb)** | Zero-shot forecasting with Timer-84M, then time-step attribution through a small generation adapter. |
+| **[Pretrained MOMENT notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_moment.ipynb)** | Zero-shot forecasting with MOMENT-1-small, then attribution through its channel-first interface. |
+| **[Pretrained TTM notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_ttm.ipynb)** | Fast zero-shot TTM forecasting, native-shape attribution, and a concrete WinTSR threshold comparison. |
+| **[Pretrained GPT4TS notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_gpt4ts.ipynb)** | Adapt a frozen GPT-2 backbone to ETTh2 with a quick supervised fit, then explain its forecast. |
 | **[Classification notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/classification.ipynb)** | `n_output` becomes the class count; a padding mask goes through as context, not as an attributed input. |
 | **[Baselines notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/baselines.ipynb)** | Why the baseline matters, `get_baseline`'s four modes compared by attribution quality, and how to use a custom one. |
 | **[Custom outputs notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/custom_outputs.ipynb)** | Wrapping models that return a dict or tuple (TimeLLM-style) with a one-line lambda. |

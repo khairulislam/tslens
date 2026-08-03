@@ -12,6 +12,23 @@ methods borrowed from vision and NLP.
 Paper: [arXiv:2412.04532](https://arxiv.org/abs/2412.04532) ·
 Code: [github.com/khairulislam/tslens](https://github.com/khairulislam/tslens)
 
+## Why tslens?
+
+| Capability | **tslens** | Captum | Time Interpret | TSInterpret |
+| --- | :---: | :---: | :---: | :---: |
+| Time-series-native attribution | ✓ | — | ✓ | ✓ |
+| Classification and regression/forecasting workflows | ✓ | Generic | Method-dependent | Classification-focused |
+| Individual forecast-horizon explanations | ✓ | Manual | Manual | — |
+| Modern deep forecaster integrations | ✓ | — | — | — |
+| Tested LLM-backed time-series models | ✓ | — | — | — |
+
+Among these libraries, tslens is the only one with documented, tested integrations
+spanning recent TSlib architectures and LLM-backed time-series models, while also
+supporting classification, regression, individual forecast horizons, and multivariate
+time–feature attribution. A dash means no first-class documented support; custom
+integration may still be possible. See the
+[full comparison](https://khairulislam.github.io/tslens/#why-tslens-instead-of-another-interpretability-library).
+
 ## Install
 
 ```bash

@@ -85,6 +85,40 @@ See the [integration cookbook](integration.md) for the full walkthrough, or the
 [TSlib models notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/tslib_models.ipynb)
 to run it.
 
+## Pretrained foundation models
+
+### Timer
+
+[Timer](https://arxiv.org/abs/2402.02368) is a generative pretrained Transformer for
+zero-shot time-series forecasting. The
+[Pretrained Timer notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_timer.ipynb)
+loads the public 84M-parameter checkpoint, forecasts ETTh2, and adapts its
+`generate()` interface for perturbation-based WinTSR attribution.
+
+### MOMENT
+
+[MOMENT](https://arxiv.org/abs/2402.03885) is an open foundation-model family for
+forecasting and other time-series tasks. The
+[Pretrained MOMENT notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_moment.ipynb)
+loads MOMENT-1-small, forecasts ETTh2, and bridges its channel-first 512-step input
+to WinTSR's time-first attribution interface.
+
+### Tiny Time Mixers (TTM)
+
+[TTM](https://arxiv.org/abs/2401.03955) is IBM's compact pretrained model family for
+zero- and few-shot forecasting. The
+[Pretrained TTM notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_ttm.ipynb)
+loads the Granite TTM-R2 512/96 checkpoint, attributes its native time-first input, and
+visualizes how WinTSR's relevance threshold changes the result.
+
+### GPT4TS / One Fits All
+
+[GPT4TS](https://arxiv.org/abs/2302.11939) adapts a mostly frozen pretrained GPT-2
+backbone to time-series tasks through trainable input and output layers. The
+[Pretrained GPT4TS notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_gpt4ts.ipynb)
+fits those forecasting layers on ETTh2, verifies a held-out forecast, and explains the
+result through GPT4TS's single-input convention.
+
 ## Model zoo and training harness
 
 Trained checkpoints, dataset loaders, and experiment scripts for all of the above live
