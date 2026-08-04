@@ -52,6 +52,9 @@ steps, or score time and features independently and combine them after the fact;
 WinTSR does both jointly, and skips low-relevance time steps in stage two so it
 stays fast on long sequences.
 
+End-to-end walkthrough: [train DLinear on real ETTh1 data and derive a when-and-where
+forecasting insight](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/case_study.ipynb).
+
 **Occlusion** — Slides a window over the input, zeroing (or replacing) each region in
 turn and measuring the change in output. The base operation WinTSR's stage one builds
 on.
@@ -85,8 +88,11 @@ paths from multiple noisy baselines.
 feature's *past* values (within a sliding window) still influence the *current*
 prediction, using a distributional distance (Jensen-Shannon or prediction-difference)
 between the real and counterfactual forecast. Unlike WinTSR, it does not separate a
-time-relevance and a feature-relevance stage — importance is scored per
-(time step, feature, delay) directly.
+time-relevance and a feature-relevance stage. Its delay concept is built into the
+progressive backward masking and distributional-distance score; the returned attribution
+has shape `(batch, n_output, seq_len, n_features)`, with no separate delay axis.
+
+Walkthrough: [compare WinIT and WinTSR on the same synthetic task](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/winit.ipynb).
 
 **FIT** — Scores each observation by the KL-divergence between the predictive
 distribution with and without it. Classification only.
@@ -99,6 +105,8 @@ small network per input to produce sparse, binary-skewed gates over
 the masked input's distribution close to the original. Requires fitting a mask network
 per batch (via a [`pytorch_lightning.Trainer`](reference/gate_mask.md)), so it is
 markedly slower than occlusion- or gradient-based methods.
+
+Walkthrough: [learn a GateMask and compare 10, 50, and 150 training epochs](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/gatemask.ipynb).
 
 **Dyna Mask** — Learns a per-timestep mask with a smoothness/sparsity penalty, trained
 to preserve the model's prediction under the masked input.

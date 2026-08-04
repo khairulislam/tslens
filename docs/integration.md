@@ -25,6 +25,8 @@ Attributions come back shaped `(batch, n_output, seq_len, n_features)`.
 | [Classification](#classification-models) | Model outputs are class scores. |
 | [Custom outputs](#models-that-return-a-dict-or-a-tuple) | The model returns a dictionary or tuple. |
 | [Choosing a baseline](#choosing-a-baseline) | Zero is not an appropriate reference value. |
+| [WinIT reference data](#winit-reference-data) | Counterfactual values should come from real series. |
+| [GateMask training](#gatemask-training) | You want a learned sparse mask and can afford an inner training loop. |
 | [Performance tuning](#performance-tuning) | Attribution needs to be faster or sparser. |
 | [Troubleshooting](#troubleshooting) | Shapes, outputs, or scores are unexpected. |
 
@@ -41,7 +43,9 @@ attr = WinTSR(model).attribute(inputs, baselines=torch.zeros_like(inputs))
 # (16, n_output, 96, 7)
 ```
 
-Full walkthrough: [quickstart notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/quickstart.ipynb).
+Start with the [quickstart notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/quickstart.ipynb),
+then see the [real-data case study](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/case_study.ipynb)
+for chronological splitting, training, held-out evaluation, and interpretation.
 
 ## TSlib models (DLinear, iTransformer, TimesNet, Autoformer, ...)
 
@@ -123,16 +127,71 @@ look like a signal.
 
 Full walkthrough: [baselines notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/baselines.ipynb).
 
+## WinIT reference data
+
+WinIT samples counterfactual replacement values from a representative dataset rather
+than accepting a fixed baseline. For forecasting, set `task_name` to anything other than
+`"classification"` to use prediction difference:
+
+```python
+import argparse
+from tslens.attr import WinIT
+
+args = argparse.Namespace(
+    seq_len=inputs.shape[1], task_name="forecast", pred_len=1, features="S", seed=0,
+)
+# WinIT expects forecasting outputs shaped (batch, pred_len, features).
+winit_model = lambda x: model(x).unsqueeze(-1)  # only if model(x) is (batch, pred_len)
+attr = WinIT(winit_model, data=x_train, args=args).attribute(
+    inputs=inputs,
+    additional_forward_args=None,
+    attributions_fn=abs,
+)
+# (batch, n_output, seq_len, n_features)
+```
+
+Full walkthrough: [WinIT notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/winit.ipynb).
+
+## GateMask training
+
+GateMask accepts one attributed input tensor and fits a mask network on each call. Its
+output has the same `(batch, seq_len, n_features)` shape as the input, without WinTSR's
+explicit `n_output` axis:
+
+```python
+from pytorch_lightning import Trainer
+from tslens.attr import GateMask
+
+attr = GateMask(model).attribute(
+    inputs=inputs,
+    baselines=torch.zeros_like(inputs),
+    trainer=Trainer(
+        max_epochs=50, accelerator="cpu", enable_progress_bar=False,
+        enable_model_summary=False, logger=False,
+    ),
+    batch_size=16,
+)
+```
+
+Full walkthrough: [GateMask notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/gatemask.ipynb).
+
 ## Explaining one forecast horizon
 
-`n_output` indexes the predictions. Index it instead of averaging.
+`n_output` indexes flattened predictions. For an output shaped
+`(batch, pred_len, channels)`, reshape that axis before selecting a horizon or channel:
 
 ```python
 attr = WinTSR(model).attribute(inputs, baselines=zeros)
 
-attr[:, 0]                       # first horizon only
-attr.abs().mean(dim=1)           # averaged over all horizons
+attr_hc = attr.reshape(batch, pred_len, channels, seq_len, n_features)
+attr_hc[:, 0]                    # first horizon, every predicted channel
+attr_hc[:, :, ot_idx]            # every horizon for predicted channel OT
+attr.abs().mean(dim=1)           # averaged over all outputs
 ```
+
+The flattening is horizon-major: for native `(horizon, channel)` output, OT also appears
+at `attr[:, ot_idx::channels]`. See the [real-data case study](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/case_study.ipynb)
+for this pattern on a 24-horizon, seven-channel forecast.
 
 ## Performance tuning
 

@@ -94,6 +94,9 @@ Plot `attr` as a heatmap over `(seq_len, n_features)` to read off what the model
 | | |
 | --- | --- |
 | **[Quickstart notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/quickstart.ipynb)** | 60 seconds, no dataset download. Plants a known signal, trains a small GRU, checks WinTSR recovers it. |
+| **[Real-data case study](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/case_study.ipynb)** | Train DLinear on all seven ETTh1 variables, verify its held-out forecast, and derive temporal and feature-level insights with WinTSR. |
+| **[WinIT notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/winit.ipynb)** | Delayed, distributional importance with reference-data counterfactuals, compared directly with WinTSR on the quickstart task. |
+| **[GateMask notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/gatemask.ipynb)** | Train a sparse GateMask explanation, measure its runtime, and see how the mask changes with more training. |
 | **[TSlib models notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/tslib_models.ipynb)** | Explaining DLinear, iTransformer, TimesNet and friends. No wrapper class needed. |
 | **[Pretrained Timer notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_timer.ipynb)** | Zero-shot forecasting with Timer-84M, then time-step attribution through a small generation adapter. |
 | **[Pretrained MOMENT notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/pretrained_moment.ipynb)** | Zero-shot forecasting with MOMENT-1-small, then attribution through its channel-first interface. |
