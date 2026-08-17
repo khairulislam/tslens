@@ -13,20 +13,26 @@ tslens is a drop-in, Captum-compatible interpretability toolkit for PyTorch
 time-series models. Every method produces a saliency map over the input window so you
 can inspect *when* and *where* a model found evidence for its prediction.
 
-Explaining time series models is hard for two reasons that interpretation methods borrowed
-from vision and NLP do not handle: subsequent time steps are strongly dependent, and
-feature importance varies over time. Existing studies (1) do not consider the temporal
-dependencies among the feature vectors in the input window, and (2) consider the time
-dimension separately from the feature dimension when calculating importance scores.
-**Windowed Temporal Saliency Rescaling (WinTSR)**, the toolkit's native flagship
-method, addresses both.
+Time series is a hard case for interpretation methods borrowed from vision and NLP:
+subsequent time steps are strongly dependent, and feature importance varies over time.
+tslens brings together over a dozen methods that account for this — some implemented
+natively, others wired in from Captum and Time Interpret — behind one API, so you can
+pick the right one for your model instead of being stuck with whatever a single library
+ships.
 
-![WinTSR attribution heatmap](docs/assets/wintsr_heatmap.png)
+![tslens workflow: SOTA and foundation time-series models in, attribution method behind one interface, saliency map out](docs/assets/workflow.svg)
+
+![Attribution over time and feature recovers a planted signal](docs/assets/hero_heatmap.png)
 
 ## Why tslens?
 
 - **Model-agnostic:** explain any callable PyTorch model with the expected input shape.
-- **Time-aware:** preserve relationships between neighbouring observations, via WinTSR.
+- **SOTA time-series models:** documented, tested integration with recent architectures
+  like DLinear, iTransformer, TimesNet, and 25+ others from TSlib.
+- **Foundation models too:** attribute zero-shot and fine-tuned forecasts from LLM-backed
+  time-series foundation models — Timer, MOMENT, TTM, CALF, GPT4TS, TimeLLM.
+- **Time-aware:** several native methods preserve relationships between neighbouring
+  observations, instead of treating each time step independently.
 - **Joint attribution:** identify important time–feature regions, not just global features.
 - **Practical:** support multi-input models, custom baselines, classification, and forecasting.
 - **One interface:** compare established interpretation methods from Captum, Time Interpret,
@@ -69,16 +75,19 @@ dataset format to conform to:
 
 ```python
 import torch
-from tslens import WinTSR
+from captum.attr import Occlusion
 
 inputs = torch.randn(16, 96, 7)             # (batch, seq_len, n_features)
-attr = WinTSR(model).attribute(
+attr = Occlusion(model).attribute(
     inputs,
+    sliding_window_shapes=(1, 1),
     baselines=torch.zeros_like(inputs),
-    threshold=0.5,
 )
 attr.shape   # (16, n_output, 96, 7)
 ```
+
+Swap `Occlusion` for `WinTSR`, `WinIT`, `GateMask`, or any other supported method — same
+call shape, same output shape.
 
 For local development, install the package with its test and documentation tools:
 
