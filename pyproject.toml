@@ -46,6 +46,7 @@ docs = ["mkdocs-material>=9", "mkdocstrings[python]>=0.25"]
 
 [project.urls]
 Homepage = "https://github.com/khairulislam/tslens"
+Documentation = "https://khairulislam.github.io/tslens/"
 Repository = "https://github.com/khairulislam/tslens"
 Paper = "https://arxiv.org/abs/2412.04532"
 

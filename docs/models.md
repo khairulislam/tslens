@@ -1,6 +1,6 @@
 # Supported models
 
-WinTSR is architecture-agnostic. It attributes **any callable** that maps
+tslens is architecture-agnostic. It attributes **any callable** that maps
 `(batch, seq_len, n_features)` — or a tuple
 of tensors — to predictions. There is no model registry and nothing to subclass: if the
 forward pass is a differentiable-or-not PyTorch computation, it can be explained.

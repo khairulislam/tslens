@@ -2,6 +2,8 @@
 
 ### A PyTorch framework for interpreting time-series deep learning models
 
+[![PyPI](https://img.shields.io/pypi/v/tslens.svg)](https://pypi.org/project/tslens/)
+[![Python](https://img.shields.io/pypi/pyversions/tslens.svg)](https://pypi.org/project/tslens/)
 [![arXiv](https://img.shields.io/badge/arXiv-2412.04532-b31b1b.svg)](https://arxiv.org/abs/2412.04532)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/quickstart.ipynb)
 [![Docs](https://img.shields.io/badge/docs-mkdocs--material-blue.svg)](https://khairulislam.github.io/tslens/)
@@ -69,6 +71,10 @@ and [integration cookbook](https://khairulislam.github.io/tslens/integration/).
 pip install tslens
 ```
 
+[PyPI package](https://pypi.org/project/tslens/) ·
+[Documentation](https://khairulislam.github.io/tslens/) ·
+[Paper](https://arxiv.org/abs/2412.04532)
+
 Requires Python 3.9+ and PyTorch 1.13+. Works with any PyTorch model mapping
 `(batch, seq_len, n_features)` to predictions — no training framework to adopt, no
 dataset format to conform to:
@@ -86,8 +92,7 @@ attr = Occlusion(model).attribute(
 attr.shape   # (16, n_output, 96, 7)
 ```
 
-Swap `Occlusion` for `WinTSR`, `WinIT`, `GateMask`, or any other supported method — same
-call shape, same output shape.
+Swap `Occlusion` for any other supported method — same call shape, same output shape.
 
 For local development, install the package with its test and documentation tools:
 
@@ -115,7 +120,7 @@ Plot `attr` as a heatmap over `(seq_len, n_features)` to read off what the model
 | **[Baselines notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/baselines.ipynb)** | Why the baseline matters, `get_baseline`'s four modes compared by attribution quality, and how to use a custom one. |
 | **[Custom outputs notebook](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/custom_outputs.ipynb)** | Wrapping models that return a dict or tuple (TimeLLM-style) with a one-line lambda. |
 | **[Integration cookbook](https://khairulislam.github.io/tslens/integration/)** | Copy-paste recipes: dict/tuple outputs, classification, baselines, single horizons, speed, troubleshooting. |
-| **[Interpretation methods](https://khairulislam.github.io/tslens/methods/)** | What WinTSR, TSR, WinIT and GateMask each do differently, and when to reach for which one. |
+| **[Interpretation methods](https://khairulislam.github.io/tslens/methods/)** | What each method does differently, and when to reach for which one. |
 | **[API reference](https://khairulislam.github.io/tslens/reference/wintsr/)** | Every argument, generated from the docstrings, including `legacy_normalize=True` to reproduce the published numbers. |
 
 Already have a TSlib model? It takes four tensors, so split them into what you want
@@ -132,7 +137,7 @@ attr_enc, attr_mark = WinTSR(model).attribute(
 ## Interpretation methods
 
 tslens gives you a broad set of interpretation methods through one interface, and works
-with any PyTorch time series model. WinTSR, TSR, WinIT, and GateMask are implemented
+with any PyTorch time series model. The time-aware methods are implemented
 natively here; the rest call [Captum](https://captum.ai/docs/introduction) and
 [tint](https://josephenguehard.github.io/time_interpret/build/html/index.html) directly.
 See [Interpretation methods](https://khairulislam.github.io/tslens/methods/) for what
@@ -212,7 +217,7 @@ Calling convention (single vs. dual-input) and trained checkpoints:
 
 | Path | What it is |
 | --- | --- |
-| [src/tslens/](/src/tslens/) | The installable library. `WinTSR` plus the paper's baseline methods (`TSR`, `WinIT`, `GateMask`). |
+| [src/tslens/](/src/tslens/) | The installable library: native method implementations plus the wrappers around Captum and Time Interpret. |
 | [notebooks/](/notebooks/) | Runnable quickstart and TSlib walkthrough. |
 | [tests/](/tests/) | Test suite, including a numerical-equivalence check against the pre-refactor implementation. |
 | [docs/](/docs/) | Source for the [docs site](https://khairulislam.github.io/tslens/): tutorials, method explainer, API reference, and the PyPI-page library reference. |

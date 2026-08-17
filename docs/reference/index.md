@@ -1,6 +1,6 @@
 # API reference
 
-The API reference is generated from WinTSR's source docstrings, so signatures and
+The API reference is generated from the tslens source docstrings, so signatures and
 defaults stay synchronized with the installed package.
 
 ## Interpretation methods

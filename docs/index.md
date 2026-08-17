@@ -3,11 +3,10 @@
 ### A PyTorch framework for interpreting time-series deep learning models
 
 tslens is a Captum-compatible interpretability toolkit for PyTorch time-series
-models. It tells you which time steps and features drove a prediction. The
-package bundles WinTSR — a local interpretation method that accounts for
-dependencies between neighbouring time steps and scores time and feature
-importance jointly — alongside other established interpretation methods behind
-one consistent interface.
+models. It tells you which time steps and features drove a prediction. Over a
+dozen interpretation methods sit behind one consistent interface — some
+implemented natively here to account for dependencies between neighbouring time
+steps, others wired in from Captum and Time Interpret.
 
 [Get started](#quickstart){ .md-button .md-button--primary }
 [Open in Colab](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/quickstart.ipynb) ·
@@ -35,8 +34,8 @@ one consistent interface.
 
 -   :material-compare:{ .lg .middle } **A consistent comparison surface**
 
-    Use WinTSR alongside established interpretation methods from Captum and Time
-    Interpret.
+    Compare native time-aware methods against established ones from Captum and
+    Time Interpret without changing your call site.
 
 </div>
 

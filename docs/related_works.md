@@ -1,6 +1,6 @@
 # Related work
 
-WinTSR builds on a growing body of research in temporal attribution, perturbation,
+tslens builds on a growing body of research in temporal attribution, perturbation,
 evaluation, and intrinsically interpretable forecasting. This page provides a map of
 the field and positions the methods available through the toolkit.
 

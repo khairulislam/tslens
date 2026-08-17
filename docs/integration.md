@@ -1,6 +1,6 @@
 # Integration cookbook
 
-Connect WinTSR to forecasting and classification models with the recipes below. Every
+Connect tslens to forecasting and classification models with the recipes below. Every
 snippet is exercised by the test suite or a runnable notebook.
 
 ## The attribution contract

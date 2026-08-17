@@ -3,12 +3,12 @@
 **Which time steps and which features did your time series model actually use?**
 
 tslens is a Captum-compatible interpretability toolkit for deep time series models,
-giving you a consistent PyTorch interface to WinTSR and other established interpretation
-methods. WinTSR (Windowed Temporal Saliency Rescaling), the native flagship method,
-accounts for the temporal dependency between neighbouring time steps and scores the
-time and feature dimensions jointly rather than separately — unlike interpretation
-methods borrowed from vision and NLP.
+giving you a consistent PyTorch interface to over a dozen interpretation methods.
+Unlike methods borrowed from vision and NLP, the ones implemented natively here
+account for the temporal dependency between neighbouring time steps and score the
+time and feature dimensions jointly rather than separately.
 
+Docs: [khairulislam.github.io/tslens](https://khairulislam.github.io/tslens/) ·
 Paper: [arXiv:2412.04532](https://arxiv.org/abs/2412.04532) ·
 Code: [github.com/khairulislam/tslens](https://github.com/khairulislam/tslens)
 
