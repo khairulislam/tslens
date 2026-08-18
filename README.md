@@ -11,16 +11,14 @@
 
 **Which time steps and features did your time-series model actually use?**
 
-tslens is a drop-in, Captum-compatible interpretability toolkit for PyTorch
-time-series models. Every method produces a saliency map over the input window so you
-can inspect *when* and *where* a model found evidence for its prediction.
+tslens is a drop-in, Captum-compatible interpretability toolkit for PyTorch time-series
+models. Every method produces a saliency map over the input window, showing *when* and
+*where* a model found evidence for its prediction.
 
 Time series is a hard case for interpretation methods borrowed from vision and NLP:
-subsequent time steps are strongly dependent, and feature importance varies over time.
-tslens brings together over a dozen methods that account for this — some implemented
-natively, others wired in from Captum and Time Interpret — behind one API, so you can
-pick the right one for your model instead of being stuck with whatever a single library
-ships.
+neighbouring time steps are strongly dependent, and feature importance shifts over time.
+tslens brings together over a dozen methods that account for this — some native, others
+wired in from Captum and Time Interpret — behind one API.
 
 ![tslens workflow: SOTA and foundation time-series models in, attribution method behind one interface, saliency map out](docs/assets/workflow.svg)
 
@@ -29,24 +27,23 @@ ships.
 ## Why tslens?
 
 - **Model-agnostic:** explain any callable PyTorch model with the expected input shape.
-- **SOTA time-series models:** documented, tested integration with recent architectures
-  like DLinear, iTransformer, TimesNet, and 25+ others from TSlib.
-- **Foundation models too:** attribute zero-shot and fine-tuned forecasts from LLM-backed
-  time-series foundation models — Timer, MOMENT, TTM, CALF, GPT4TS, TimeLLM.
-- **Time-aware:** several native methods preserve relationships between neighbouring
-  observations, instead of treating each time step independently.
-- **Joint attribution:** identify important time–feature regions, not just global features.
-- **Practical:** support multi-input models, custom baselines, classification, and forecasting.
-- **One interface:** compare established interpretation methods from Captum, Time Interpret,
-  and this package's own native implementations side by side.
+- **SOTA time-series models:** tested integration with DLinear, iTransformer, TimesNet,
+  and 25+ others from TSlib.
+- **Foundation models too:** attribute zero-shot and fine-tuned forecasts from Timer,
+  MOMENT, TTM, CALF, GPT4TS, TimeLLM.
+- **Time-aware:** native methods preserve relationships between neighbouring observations
+  instead of treating each time step independently.
+- **Joint attribution:** important time–feature regions, not just global features.
+- **Practical:** multi-input models, custom baselines, classification, and forecasting.
+- **One interface:** Captum, Time Interpret, and tslens's own methods, side by side.
 
 ### How it compares
 
-Most general-purpose explainability libraries treat a time series as another input tensor,
-while existing time-series packages are documented primarily around classifier or compact
-benchmark models. tslens connects a broad attribution API to modern time-series practice:
+Most general-purpose explainability libraries treat a time series as another input
+tensor; existing time-series packages are documented mainly around classifiers or
+compact benchmark models. tslens targets modern time-series practice instead:
 multi-horizon and multivariate outputs, recent deep forecasting architectures, and
-LLM-backed time-series foundation models.
+LLM-backed foundation models.
 
 | Capability | **tslens** | [Captum](https://github.com/meta-pytorch/captum) | [Time Interpret](https://github.com/josephenguehard/time_interpret) | [TSInterpret](https://github.com/fzi-forschungszentrum-informatik/TSInterpret) |
 | --- | :---: | :---: | :---: | :---: |
@@ -58,12 +55,12 @@ LLM-backed time-series foundation models.
 | Tested with LLM-backed time-series foundation models | ✓ | — | — | — |
 | Native and established methods behind one PyTorch API | ✓ | General-purpose methods | Captum + time-series methods | Separate multi-backend API |
 
-Here, “—” means the project does not provide first-class, documented support for the
-capability—not that integration is theoretically impossible. Among these libraries,
-tslens is the only one with documented, tested integrations spanning TSlib models such
-as DLinear, iTransformer, and TimesNet and LLM-backed models such as CALF, OFA/GPT4TS,
-and TimeLLM. See the [tested model matrix](https://khairulislam.github.io/tslens/models/)
-and [integration cookbook](https://khairulislam.github.io/tslens/integration/).
+"—" means the project doesn't provide first-class, documented support for the
+capability, not that it's impossible. Among these libraries, tslens is the only one
+with tested integrations spanning TSlib models (DLinear, iTransformer, TimesNet) and
+LLM-backed models (CALF, OFA/GPT4TS, TimeLLM). See the
+[tested model matrix](https://khairulislam.github.io/tslens/models/) and
+[integration cookbook](https://khairulislam.github.io/tslens/integration/).
 
 ## Quickstart
 
@@ -76,8 +73,8 @@ pip install tslens
 [Paper](https://arxiv.org/abs/2412.04532)
 
 Requires Python 3.9+ and PyTorch 1.13+. Works with any PyTorch model mapping
-`(batch, seq_len, n_features)` to predictions — no training framework to adopt, no
-dataset format to conform to:
+`(batch, seq_len, n_features)` to predictions — no training framework or dataset format
+to adopt:
 
 ```python
 import torch
@@ -136,12 +133,12 @@ attr_enc, attr_mark = WinTSR(model).attribute(
 
 ## Interpretation methods
 
-tslens gives you a broad set of interpretation methods through one interface, and works
-with any PyTorch time series model. The time-aware methods are implemented
-natively here; the rest call [Captum](https://captum.ai/docs/introduction) and
+One interface, over a dozen methods, works with any PyTorch time-series model. The
+time-aware methods are native; the rest call
+[Captum](https://captum.ai/docs/introduction) and
 [tint](https://josephenguehard.github.io/time_interpret/build/html/index.html) directly.
 See [Interpretation methods](https://khairulislam.github.io/tslens/methods/) for what
-each one does differently and when to use it.
+each one does differently.
 
 <details>
 <summary><b>Supported methods</b> (click to expand)</summary>
@@ -170,9 +167,10 @@ Full comparison matrix (model requirement, baseline, API doc):
 ## Supported models
 
 tslens attributes any callable that maps `(batch, seq_len, n_features)` — or a tuple of
-tensors — to predictions, so nothing here is hard-coded to a specific architecture. The
-list below is what this package and its [research harness](https://github.com/khairulislam/WinTSR-research)
-have actually been run against.
+tensors — to predictions; nothing is hard-coded to a specific architecture. The list
+below is what this package and its
+[research harness](https://github.com/khairulislam/WinTSR-research) have actually been
+run against.
 
 <details>
 <summary><b>Supported model architectures</b> (click to expand)</summary>
@@ -229,11 +227,9 @@ package the same way any user would (`pip install tslens`).
 
 ## Reproducing the paper
 
-Training the models, running the full benchmark, and the paper's saved results live in
-[WinTSR-research](https://github.com/khairulislam/WinTSR-research), which installs this
-package as a regular dependency. That repo also has the model zoo — DLinear,
-iTransformer, TimesNet, CALF, TimeLLM and 25 others from
-[TSlib](https://github.com/thuml/Time-Series-Library) — dataset download instructions,
+Training, the full benchmark, and saved results live in
+[WinTSR-research](https://github.com/khairulislam/WinTSR-research), including the model
+zoo, [TSlib](https://github.com/thuml/Time-Series-Library) dataset download instructions,
 and Docker/Singularity definitions.
 
 ## Citation
