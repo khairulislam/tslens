@@ -10,10 +10,6 @@ readme = "docs/pypi_readme.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Md Khairul Islam" },
-    { name = "Judy Fox" },
-]
-maintainers = [
     { name = "Md Khairul Islam", email = "khairulislam@virginia.edu" },
 ]
 keywords = [
