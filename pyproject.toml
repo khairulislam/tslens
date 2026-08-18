@@ -4,14 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tslens"
-version = "0.1.0"
+version = "0.1.1"
 description = "A PyTorch framework for interpreting time series deep learning models"
 readme = "docs/pypi_readme.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Md Khairul Islam", email = "khairulislam@virginia.edu" },
+    { name = "Md Khairul Islam" },
     { name = "Judy Fox" },
+]
+maintainers = [
+    { name = "Md Khairul Islam", email = "khairulislam@virginia.edu" },
 ]
 keywords = [
     "time-series",
@@ -19,19 +22,25 @@ keywords = [
     "explainable-ai",
     "xai",
     "saliency",
+    "attribution",
     "captum",
     "pytorch",
     "forecasting",
+    "foundation-models",
+    "deep-learning",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
 ]
 dependencies = [
     "torch>=1.13",
