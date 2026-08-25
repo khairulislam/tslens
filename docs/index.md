@@ -59,7 +59,7 @@ LLM-backed time-series foundation models.
 
 !!! note "A scoped comparison"
 
-    “—” means the project does not provide first-class, documented support for the
+    "—" means the project does not provide first-class, documented support for the
     capability, not that integration is theoretically impossible. Among these libraries,
     tslens is the only one with documented, tested integrations spanning TSlib models such
     as DLinear, iTransformer, and TimesNet and LLM-backed models such as CALF, OFA/GPT4TS,
