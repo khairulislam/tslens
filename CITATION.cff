@@ -1,22 +1,30 @@
 cff-version: 1.2.0
 message: If you use this software, please cite it as below.
-title: "WinTSR: A Windowed Temporal Saliency Rescaling Method for Interpreting Time Series Deep Learning Models"
+type: software
+title: "tslens: A PyTorch Framework for Interpreting Time Series Deep Learning Models"
+abstract: "SOTA time series interpretability library for PyTorch, from supervised to foundation models. Implements WinTSR and other saliency/attribution methods for explaining time series deep learning predictions."
 authors:
   - family-names: Islam
     given-names: Md Khairul
     email: khairulislam@virginia.edu
-  - family-names: Fox
-    given-names: Judy
+version: 1.0.0
+date-released: "2026-08-17"
 repository-code: "https://github.com/khairulislam/tslens"
+url: "https://khairulislam.github.io/tslens/"
 license: MIT
-preferred-citation:
-  type: article
-  title: "WinTSR: A Windowed Temporal Saliency Rescaling Method for Interpreting Time Series Deep Learning Models"
-  authors:
-    - family-names: Islam
-      given-names: Md Khairul
-    - family-names: Fox
-      given-names: Judy
-  journal: arXiv preprint arXiv:2412.04532
-  year: 2024
-  url: "https://arxiv.org/abs/2412.04532"
+keywords:
+  - time-series
+  - interpretability
+  - explainable-ai
+  - xai
+  - saliency
+  - attribution
+  - captum
+  - pytorch
+  - forecasting
+  - foundation-models
+  - deep-learning
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22088943
+    description: Archived snapshot of tslens v1.0.0 on Zenodo
