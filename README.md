@@ -24,6 +24,21 @@ wired in from Captum and Time Interpret — behind one API.
 
 ![Attribution over time and feature recovers a planted signal](docs/assets/hero_heatmap.png)
 
+Please cite the following if you use this work 
+
+```bibtex
+@software{islam_2026_22088943,
+  author       = {Islam, Md Khairul},
+  title        = {tslens: A PyTorch Framework for Interpreting Time Series Deep Learning Models},
+  month        = aug,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {v1.0.0},
+  doi          = {10.5281/zenodo.22088943},
+  url          = {https://doi.org/10.5281/zenodo.22088943}
+}
+```
+
 ## Why tslens?
 
 - **Model-agnostic:** explain any callable PyTorch model with the expected input shape.

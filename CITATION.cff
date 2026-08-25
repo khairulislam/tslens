@@ -26,5 +26,8 @@ keywords:
   - deep-learning
 identifiers:
   - type: doi
+    value: 10.5281/zenodo.22088942
+    description: Concept DOI — always resolves to the latest archived version of tslens on Zenodo
+  - type: doi
     value: 10.5281/zenodo.22088943
-    description: Archived snapshot of tslens v1.0.0 on Zenodo
+    description: Version-specific DOI for tslens v1.0.0 on Zenodo
