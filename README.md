@@ -4,7 +4,6 @@
 
 [![PyPI](https://img.shields.io/pypi/v/tslens.svg)](https://pypi.org/project/tslens/)
 [![Python](https://img.shields.io/pypi/pyversions/tslens.svg)](https://pypi.org/project/tslens/)
-[![arXiv](https://img.shields.io/badge/arXiv-2412.04532-b31b1b.svg)](https://arxiv.org/abs/2412.04532)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/khairulislam/tslens/blob/main/notebooks/quickstart.ipynb)
 [![Docs](https://img.shields.io/badge/docs-mkdocs--material-blue.svg)](https://khairulislam.github.io/tslens/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -12,13 +11,14 @@
 **Which time steps and features did your time-series model actually use?**
 
 tslens is a drop-in, Captum-compatible interpretability toolkit for PyTorch time-series
-models. Every method produces a saliency map over the input window, showing *when* and
-*where* a model found evidence for its prediction.
+models. Every method returns a saliency map over the input window, pinpointing *when* and
+*where* the model found evidence for its prediction.
 
-Time series is a hard case for interpretation methods borrowed from vision and NLP:
-neighbouring time steps are strongly dependent, and feature importance shifts over time.
-tslens brings together over a dozen methods that account for this — some native, others
-wired in from Captum and Time Interpret — behind one API.
+Interpretation methods built for vision and NLP don't transfer cleanly to time series:
+neighbouring time steps are strongly correlated, and a feature's importance can shift from
+one time step to the next. tslens gathers over a dozen methods designed for or adapted to
+this setting, some native, others wired in from Captum and Time Interpret, behind a
+single API.
 
 ![tslens workflow: SOTA and foundation time-series models in, attribution method behind one interface, saliency map out](docs/assets/workflow.svg)
 
@@ -84,11 +84,10 @@ pip install tslens
 ```
 
 [PyPI package](https://pypi.org/project/tslens/) ·
-[Documentation](https://khairulislam.github.io/tslens/) ·
-[Paper](https://arxiv.org/abs/2412.04532)
+[Documentation](https://khairulislam.github.io/tslens/)
 
 Requires Python 3.9+ and PyTorch 1.13+. Works with any PyTorch model mapping
-`(batch, seq_len, n_features)` to predictions — no training framework or dataset format
+`(batch, seq_len, n_features)` to predictions. No training framework or dataset format
 to adopt:
 
 ```python
@@ -104,7 +103,7 @@ attr = Occlusion(model).attribute(
 attr.shape   # (16, n_output, 96, 7)
 ```
 
-Swap `Occlusion` for any other supported method — same call shape, same output shape.
+Swap `Occlusion` for any other supported method: same call shape, same output shape.
 
 For local development, install the package with its test and documentation tools:
 
@@ -181,8 +180,8 @@ Full comparison matrix (model requirement, baseline, API doc):
 
 ## Supported models
 
-tslens attributes any callable that maps `(batch, seq_len, n_features)` — or a tuple of
-tensors — to predictions; nothing is hard-coded to a specific architecture. The list
+tslens attributes any callable that maps `(batch, seq_len, n_features)` (or a tuple of
+tensors) to predictions; nothing is hard-coded to a specific architecture. The list
 below is what this package and its
 [research harness](https://github.com/khairulislam/WinTSR-research) have actually been
 run against.
@@ -236,7 +235,7 @@ Calling convention (single vs. dual-input) and trained checkpoints:
 | [docs/](/docs/) | Source for the [docs site](https://khairulislam.github.io/tslens/): tutorials, method explainer, API reference, and the PyPI-page library reference. |
 
 This repo is the library only. The training/interpretation harness that produced the
-paper's results — model zoo, experiment scripts, saved results — lives in
+paper's results (model zoo, experiment scripts, saved results) lives in
 [WinTSR-research](https://github.com/khairulislam/WinTSR-research) and depends on this
 package the same way any user would (`pip install tslens`).
 
@@ -263,14 +262,14 @@ Find our paper on [arXiv](https://arxiv.org/pdf/2412.04532). Please cite the fol
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
 
 ## Core libraries
 
 tslens builds on these open-source projects:
 
-- **[Captum](https://captum.ai/docs/introduction)** — model interpretability library for PyTorch.
-- **[Time Interpret (tint)](https://josephenguehard.github.io/time_interpret/build/html/index.html)** — extends Captum with methods designed for time series.
-- **[Time-Series-Library (TSlib)](https://github.com/thuml/Time-Series-Library)** — deep time series analysis models used in the benchmark.
+- **[Captum](https://captum.ai/docs/introduction)**: model interpretability library for PyTorch.
+- **[Time Interpret (tint)](https://josephenguehard.github.io/time_interpret/build/html/index.html)**: extends Captum with methods designed for time series.
+- **[Time-Series-Library (TSlib)](https://github.com/thuml/Time-Series-Library)**: deep time series analysis models used in the benchmark.
 
 <!-- add here https://github.com/thuml/OpenLTM, https://github.com/thuml/Large-Time-Series-Model, https://github.com/fzi-forschungszentrum-informatik/TSInterpret.git -->

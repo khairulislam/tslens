@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: If you use this software, please cite it as below.
 type: software
 title: "tslens: A PyTorch Framework for Interpreting Time Series Deep Learning Models"
-abstract: "SOTA time series interpretability library for PyTorch, from supervised to foundation models. Implements WinTSR and other saliency/attribution methods for explaining time series deep learning predictions."
+abstract: "SOTA time series interpretability library for PyTorch, from supervised to foundation models. Implements saliency and attribution methods for explaining time series deep learning predictions."
 authors:
   - family-names: Islam
     given-names: Md Khairul
@@ -27,7 +27,7 @@ keywords:
 identifiers:
   - type: doi
     value: 10.5281/zenodo.22088942
-    description: Concept DOI — always resolves to the latest archived version of tslens on Zenodo
+    description: Concept DOI, always resolves to the latest archived version of tslens on Zenodo
   - type: doi
     value: 10.5281/zenodo.22088943
     description: Version-specific DOI for tslens v1.0.0 on Zenodo

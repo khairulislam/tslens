@@ -4,7 +4,7 @@
 
 tslens is a Captum-compatible interpretability toolkit for PyTorch time-series
 models. It tells you which time steps and features drove a prediction. Over a
-dozen interpretation methods sit behind one consistent interface — some
+dozen interpretation methods sit behind one consistent interface, some
 implemented natively here to account for dependencies between neighbouring time
 steps, others wired in from Captum and Time Interpret.
 
@@ -60,7 +60,7 @@ LLM-backed time-series foundation models.
 !!! note "A scoped comparison"
 
     “—” means the project does not provide first-class, documented support for the
-    capability—not that integration is theoretically impossible. Among these libraries,
+    capability, not that integration is theoretically impossible. Among these libraries,
     tslens is the only one with documented, tested integrations spanning TSlib models such
     as DLinear, iTransformer, and TimesNet and LLM-backed models such as CALF, OFA/GPT4TS,
     and TimeLLM. See [tested models](models.md) and the
@@ -160,10 +160,10 @@ outputs, single forecast horizons, baseline selection, and performance tuning.
 
 ## Further reading
 
-- [Integration cookbook](integration.md) — recipes for common model signatures and attribution workflows.
-- [Interpretation methods](methods.md) — requirements, trade-offs, and recommended use cases for every method.
-- [Supported models](models.md) — architectures and calling conventions tested with WinTSR.
-- [API reference](reference/wintsr.md) — signatures and parameters generated from the package docstrings.
+- [Integration cookbook](integration.md): recipes for common model signatures and attribution workflows.
+- [Interpretation methods](methods.md): requirements, trade-offs, and recommended use cases for every method.
+- [Supported models](models.md): architectures and calling conventions tested with tslens.
+- [API reference](reference/wintsr.md): signatures and parameters generated from the package docstrings.
 
 ## Reproduce the research
 
@@ -173,7 +173,7 @@ and saved results used in the paper.
 
 ## Citation
 
-If WinTSR supports your research, please cite:
+If tslens supports your research, please cite:
 
 ```bibtex
 @article{islam2024wintsr,
