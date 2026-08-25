@@ -97,11 +97,17 @@ and
 
 ## Citation
 
+Please cite the following if you use this work, also the related paper [arXiv:2412.04532](https://arxiv.org/abs/2412.04532).
+
 ```bibtex
-@article{islam2024wintsr,
-  title={WinTSR: A Windowed Temporal Saliency Rescaling Method for Interpreting Time Series Deep Learning Models},
-  author={Islam, Md Khairul and Fox, Judy},
-  journal={arXiv preprint arXiv:2412.04532},
-  year={2024}
+@software{islam_2026_22088943,
+  author       = {Islam, Md Khairul},
+  title        = {tslens: A PyTorch Framework for Interpreting Time Series Deep Learning Models},
+  month        = aug,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {v1.0.0},
+  doi          = {10.5281/zenodo.22088943},
+  url          = {https://doi.org/10.5281/zenodo.22088943}
 }
 ```
